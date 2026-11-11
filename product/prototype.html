@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Job Copilot - 核心页面低保真原型</title>
+<style>
+  :root {
+    --ink: #202124;
+    --muted: #5f6368;
+    --line: #9aa0a6;
+    --fill: #f1f3f4;
+    --paper: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 28px;
+    background: #fafafa;
+    color: var(--ink);
+    font: 14px/1.55 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  }
+  h1 { margin: 0 0 4px; font-size: 19px; font-weight: 600; letter-spacing: .2px; }
+  .sub { margin: 0 0 18px; font-size: 12px; color: var(--muted); }
+  nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  nav button {
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  nav button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .panel { display: none; }
+  .panel.on { display: block; }
+  .caption { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+  .frame { max-width: 1020px; border: 2px solid var(--line); background: var(--paper); }
+  .win { display: flex; min-height: 430px; }
+  .side {
+    width: 156px;
+    flex: none;
+    border-right: 2px dashed var(--line);
+    padding: 12px;
+    background: var(--fill);
+  }
+  .side .logo { border: 1px solid var(--line); padding: 8px; margin-bottom: 14px; font-size: 12px; }
+  .side .item { border: 1px dashed var(--line); padding: 6px 8px; margin-bottom: 7px; font-size: 12px; }
+  .side .item.cur { border-style: solid; background: var(--paper); }
+  .side .group { font-size: 11px; color: var(--muted); margin: 14px 0 6px; }
+  .main { flex: 1; padding: 14px; min-width: 0; }
+  .head {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 12px;
+  }
+  .head strong { font-size: 15px; font-weight: 600; }
+  .btn { border: 1px solid var(--line); background: var(--paper); padding: 3px 10px; font-size: 12px; }
+  .bar { border: 1px dashed var(--line); background: var(--fill); padding: 9px; margin-bottom: 12px; font-size: 12px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .stat { border: 1px dashed var(--line); padding: 10px; font-size: 12px; }
+  .stat b { display: block; font-size: 17px; font-weight: 500; margin-top: 4px; }
+  .row { border: 1px dashed var(--line); background: var(--fill); padding: 9px 10px; margin-bottom: 7px; font-size: 12px; }
+  .row .cols { display: grid; grid-template-columns: 2fr 1.4fr 1fr 1fr 1fr 1fr; gap: 6px; }
+  .row.head-row { background: var(--paper); border-style: solid; color: var(--muted); }
+  .tag { border: 1px solid var(--line); padding: 0 5px; font-size: 11px; }
+  .tag.ok { border-style: solid; }
+  .tag.hold { background: var(--paper); }
+  .drop { border: 2px dashed var(--line); padding: 18px; text-align: center; margin-bottom: 12px; font-size: 12px; color: var(--muted); }
+  .field { margin-bottom: 10px; }
+  .field label { display: block; font-size: 12px; margin-bottom: 4px; }
+  .field .box { border: 1px dashed var(--line); background: var(--fill); padding: 9px; font-size: 12px; color: var(--muted); }
+  .field .box.tall { min-height: 76px; }
+  .foot { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 9px; font-size: 11px; color: var(--muted); }
+  .note { margin: 12px 0 0; font-size: 12px; color: var(--muted); max-width: 1020px; }
+</style>
+</head>
+<body>
+
+<h1>AI Job Copilot / 核心页面低保真原型</h1>
+<p class="sub">只画骨架和状态，不是视觉稿。字段名一律占位，不放真实数据。四个标签对应 front/app 里已有的路由。</p>
+
+<nav>
+  <button class="on" data-p="p1">1 岗位分析</button>
+  <button data-p="p2">2 简历中心</button>
+  <button data-p="p3">3 投递记录</button>
+  <button data-p="p4">4 AI 配置</button>
+</nav>
+
+<section class="panel on" id="p1">
+  <p class="caption">/boss/analysis - 重点是「跳过」和「待人工」两类，不是列表好看。</p>
+  <div class="frame"><div class="win">
+    <div class="side">
+      <div class="logo">AI Job Copilot</div>
+      <div class="group">平台</div>
+      <div class="item">平台 A</div><div class="item">平台 B</div><div class="item">平台 C</div>
+      <div class="group">简历与投递</div>
+      <div class="item cur">岗位分析</div><div class="item">简历中心</div><div class="item">投递记录</div>
+      <div class="group">配置</div>
+      <div class="item">AI 配置</div>
+    </div>
+    <div class="main">
+      <div class="head"><strong>岗位分析</strong><span class="btn">刷新</span></div>
+      <div class="bar">筛选：平台 [ 全部 ]　状态 [ 全部 ]　关键词 [　　　]　<span class="btn">查询</span></div>
+      <div class="stats">
+        <div class="stat">抓到<b>--</b></div><div class="stat">通过<b>--</b></div>
+        <div class="stat">跳过<b>--</b></div><div class="stat">待人工<b>--</b></div>
+      </div>
+      <div class="row head-row"><div class="cols"><span>岗位名</span><span>公司</span><span>城市</span><span>经验</span><span>状态</span><span>操作</span></div></div>
+      <div class="row"><div class="cols"><span>示例岗位 A</span><span>示例公司 A</span><span>城市 A</span><span>不限</span><span class="tag ok">通过</span><span>查看</span></div></div>
+      <div class="row"><div class="cols"><span>示例岗位 B</span><span>示例公司 B</span><span>城市 B</span><span>不限</span><span class="tag">跳过</span><span>看原因</span></div></div>
+      <div class="row"><div class="cols"><span>示例岗位 C</span><span>示例公司 C</span><span>城市 C</span><span>不限</span><span class="tag hold">待人工</span><span>转定制</span></div></div>
+      <div class="row"><div class="cols"><span>示例岗位 D</span><span>示例公司 D</span><span>城市 D</span><span>不限</span><span class="tag">已投</span><span>看记录</span></div></div>
+      <div class="foot">上一页　1 / --　下一页　｜　统计条无数据时显示占位横线，不显示零，免得把空结果当成真的零。</div>
+    </div>
+  </div></div>
+</section>
+
+<section class="panel" id="p2">
+  <p class="caption">/resume-center - 「缺文件」这行是故意留的，没有对应附件就不能开投。</p>
+  <div class="frame"><div class="win">
+    <div class="side">
+      <div class="logo">AI Job Copilot</div>
+      <div class="group">平台</div>
+      <div class="item">平台 A</div><div class="item">平台 B</div>
+      <div class="group">简历与投递</div>
+      <div class="item">岗位分析</div><div class="item cur">简历中心</div><div class="item">投递记录</div>
+      <div class="group">配置</div>
+      <div class="item">AI 配置</div>
+    </div>
+    <div class="main">
+      <div class="head"><strong>简历与人工门</strong><span class="btn">上传</span></div>
+      <div class="drop">点这里选附件文件　｜　未选 / 上传中 / 成功 / 失败，失败要给原因</div>
+      <div class="row head-row"><div class="cols"><span>版本</span><span>方向</span><span>文件</span><span>状态</span><span>操作</span><span>备注</span></div></div>
+      <div class="row"><div class="cols"><span>版本 A</span><span>方向 A</span><span>附件 A.pdf</span><span class="tag ok">已就绪</span><span>预览</span><span>--</span></div></div>
+      <div class="row"><div class="cols"><span>版本 B</span><span>方向 B</span><span>附件 B.pdf</span><span class="tag ok">已就绪</span><span>预览</span><span>--</span></div></div>
+      <div class="row"><div class="cols"><span>版本 C</span><span>方向 C</span><span>--</span><span class="tag hold">缺文件</span><span>补传</span><span>不允许开投</span></div></div>
+      <div class="bar">映射规则：方向 → 附件版本　<span class="btn">保存</span>　｜　保存后立刻生效，不重启</div>
+      <div class="bar">人工门：需要人确认后再投　[ 开 / 关 ]　｜　开着的时候任务停在待确认，等人放行</div>
+      <div class="foot">附件版本、映射、人工门是三件事，别合成一个开关。</div>
+    </div>
+  </div></div>
+</section>
+
+<section class="panel" id="p3">
+  <p class="caption">/records/all - 「跳过」也进记录，不然复盘只看得见投出去的。</p>
+  <div class="frame"><div class="win">
+    <div class="side">
+      <div class="logo">AI Job Copilot</div>
+      <div class="group">平台</div>
+      <div class="item">平台 A</div><div class="item">平台 B</div>
+      <div class="group">简历与投递</div>
+      <div class="item">岗位分析</div><div class="item">简历中心</div><div class="item cur">投递记录</div>
+      <div class="group">配置</div>
+      <div class="item">AI 配置</div>
+    </div>
+    <div class="main">
+      <div class="head"><strong>投递记录</strong><span class="btn">导出</span></div>
+      <div class="bar">筛选：平台 [ 全部 ]　日期 [　　　]　结果 [ 全部 ]　<span class="btn">查询</span></div>
+      <div class="row head-row"><div class="cols"><span>岗位</span><span>公司</span><span>平台</span><span>附件版本</span><span>结果</span><span>时间</span></div></div>
+      <div class="row"><div class="cols"><span>示例岗位 A</span><span>示例公司 A</span><span>平台 A</span><span>版本 A</span><span class="tag ok">成功</span><span>--</span></div></div>
+      <div class="row"><div class="cols"><span>示例岗位 B</span><span>示例公司 B</span><span>平台 B</span><span>版本 B</span><span class="tag">失败</span><span>--</span></div></div>
+      <div class="row"><div class="cols"><span>示例岗位 C</span><span>示例公司 C</span><span>平台 C</span><span>--</span><span class="tag">跳过</span><span>--</span></div></div>
+      <div class="bar">点一行展开：招呼语 / 失败原因 / 岗位来源　｜　无记录时给引导，不显示空白表格</div>
+      <div class="foot">导出只导当前筛选结果，无数据时按钮禁用。</div>
+    </div>
+  </div></div>
+</section>
+
+<section class="panel" id="p4">
+  <p class="caption">/ai-config - 「试跑一次」只生成不投递，改完 prompt 别直接拿真实岗位去发。</p>
+  <div class="frame"><div class="win">
+    <div class="side">
+      <div class="logo">AI Job Copilot</div>
+      <div class="group">平台</div>
+      <div class="item">平台 A</div><div class="item">平台 B</div>
+      <div class="group">简历与投递</div>
+      <div class="item">岗位分析</div><div class="item">简历中心</div><div class="item">投递记录</div>
+      <div class="group">配置</div>
+      <div class="item cur">AI 配置</div>
+    </div>
+    <div class="main">
+      <div class="head"><strong>AI 配置</strong><span class="btn">试跑一次</span></div>
+      <div class="field"><label>接口地址</label><div class="box">占位，只在本机保存</div></div>
+      <div class="field"><label>密钥</label><div class="box">占位，默认掩码，不回显明文到日志　[ 显示 / 隐藏 ]</div></div>
+      <div class="field"><label>模型</label><div class="box">占位</div></div>
+      <div class="field"><label>自我介绍</label><div class="box tall">多行文本占位，用之前换成自己的真实信息</div></div>
+      <div class="field"><label>提示词</label><div class="box tall">多行文本占位，含若干个占位符；留空时走内置默认模板</div></div>
+      <div class="bar">状态提示：未配置 / 已保存 / 调用失败 + 原因　｜　<span class="btn">保存</span></div>
+      <div class="foot">试跑只生成、不投递；失败要给原因，不能只写「失败」。</div>
+    </div>
+  </div></div>
+</section>
+
+<p class="note">说明：线框里的「方向 A」「示例岗位」都是占位，不是真实数据；本文件不连任何服务，也不引用个人能力库。配套文字说明见 04-页面原型.md。</p>
+
+<script>
+  var buttons = document.querySelectorAll('nav button');
+  var panels = document.querySelectorAll('.panel');
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      buttons.forEach(function (x) { x.classList.remove('on'); });
+      panels.forEach(function (p) { p.classList.remove('on'); });
+      b.classList.add('on');
+      document.getElementById(b.getAttribute('data-p')).classList.add('on');
+    });
+  });
+</script>
+
+</body>
+</html>
