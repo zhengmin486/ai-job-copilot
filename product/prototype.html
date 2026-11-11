@@ -78,13 +78,15 @@
 <body>
 
 <h1>AI Job Copilot / 核心页面低保真原型</h1>
-<p class="sub">只画骨架和状态，不是视觉稿。字段名一律占位，不放真实数据。四个标签对应 front/app 里已有的路由。</p>
+<p class="sub">只画骨架和状态，不是视觉稿。字段名一律占位，不放真实数据。前四个标签对应已有路由，后两个是未实现的候选设计。</p>
 
 <nav>
   <button class="on" data-p="p1">1 岗位分析</button>
   <button data-p="p2">2 简历中心</button>
   <button data-p="p3">3 投递记录</button>
   <button data-p="p4">4 AI 配置</button>
+  <button data-p="p5">5 配置检查 候选</button>
+  <button data-p="p6">6 复盘与规则 候选</button>
 </nav>
 
 <section class="panel on" id="p1">
@@ -168,7 +170,7 @@
 </section>
 
 <section class="panel" id="p4">
-  <p class="caption">/ai-config - 「试跑一次」只生成不投递，改完 prompt 别直接拿真实岗位去发。</p>
+  <p class="caption">/ai-config - 「试跑一次」只生成不投递，改完提示词后不直接拿真实岗位去发。</p>
   <div class="frame"><div class="win">
     <div class="side">
       <div class="logo">AI Job Copilot</div>
@@ -184,7 +186,7 @@
       <div class="field"><label>接口地址</label><div class="box">占位，只在本机保存</div></div>
       <div class="field"><label>密钥</label><div class="box">占位，默认掩码，不回显明文到日志　[ 显示 / 隐藏 ]</div></div>
       <div class="field"><label>模型</label><div class="box">占位</div></div>
-      <div class="field"><label>自我介绍</label><div class="box tall">多行文本占位，用之前换成自己的真实信息</div></div>
+      <div class="field"><label>自我介绍</label><div class="box tall">多行文本占位，使用前替换为真实信息</div></div>
       <div class="field"><label>提示词</label><div class="box tall">多行文本占位，含若干个占位符；留空时走内置默认模板</div></div>
       <div class="bar">状态提示：未配置 / 已保存 / 调用失败 + 原因　｜　<span class="btn">保存</span></div>
       <div class="foot">试跑只生成、不投递；失败要给原因，不能只写「失败」。</div>
@@ -192,7 +194,57 @@
   </div></div>
 </section>
 
-<p class="note">说明：线框里的「方向 A」「示例岗位」都是占位，不是真实数据；本文件不连任何服务，也不引用个人能力库。配套文字说明见 04-页面原型.md。</p>
+<section class="panel" id="p5">
+  <p class="caption">候选页，当前仓库未实现 - 把首次配置的缺项在启动之前摊开，不是加一个向导。</p>
+  <div class="frame"><div class="win">
+    <div class="side">
+      <div class="logo">AI Job Copilot</div>
+      <div class="group">平台</div>
+      <div class="item">平台 A</div><div class="item">平台 B</div>
+      <div class="group">简历与投递</div>
+      <div class="item">岗位分析</div><div class="item">简历中心</div><div class="item">投递记录</div>
+      <div class="group">配置</div>
+      <div class="item cur">首次配置检查</div><div class="item">AI 配置</div>
+    </div>
+    <div class="main">
+      <div class="head"><strong>首次配置检查</strong><span class="btn">重新检查</span></div>
+      <div class="bar">完成度　-- / --　｜　有未通过项时不显示启动入口</div>
+      <div class="row"><span class="tag ok">已就绪</span>　本机数据库　　　　　　　　　　　　　--</div>
+      <div class="row"><span class="tag ok">已就绪</span>　平台登录态　　　　　　　<span class="btn">去扫码</span></div>
+      <div class="row"><span class="tag hold">未配置</span>　平台搜索条件　　　　　　<span class="btn">去填</span></div>
+      <div class="row"><span class="tag hold">缺一项</span>　附件版本与映射　　　　　<span class="btn">去补</span></div>
+      <div class="row"><span class="tag">可选</span>　　AI 配置，不阻塞启动　　　<span class="btn">去填</span></div>
+      <div class="foot">每项直接跳到对应配置页；缺项时给原因，不静默禁用启动按钮。</div>
+    </div>
+  </div></div>
+</section>
+
+<section class="panel" id="p6">
+  <p class="caption">候选页，当前仓库未实现 - 反馈闭环的界面形态，刻意不做自动调参。</p>
+  <div class="frame"><div class="win">
+    <div class="side">
+      <div class="logo">AI Job Copilot</div>
+      <div class="group">平台</div>
+      <div class="item">平台 A</div><div class="item">平台 B</div>
+      <div class="group">简历与投递</div>
+      <div class="item">岗位分析</div><div class="item">简历中心</div><div class="item">投递记录</div>
+      <div class="group">复盘</div>
+      <div class="item cur">规则效果</div>
+    </div>
+    <div class="main">
+      <div class="head"><strong>复盘与规则效果</strong><span class="btn">导出样本</span></div>
+      <div class="row head-row"><div class="cols"><span>规则</span><span>拦截数</span><span>放行后结果</span><span>误拦复核</span><span>操作</span><span>备注</span></div></div>
+      <div class="row"><div class="cols"><span>硬要求拦截</span><span>--</span><span>--</span><span>--</span><span>抽样</span><span>--</span></div></div>
+      <div class="row"><div class="cols"><span>去重拦截</span><span>--</span><span>--</span><span>--</span><span>抽样</span><span>--</span></div></div>
+      <div class="row"><div class="cols"><span>AI 拒绝</span><span>--</span><span>--</span><span>--</span><span>抽样</span><span>--</span></div></div>
+      <div class="bar">提示词版本对照　版本 A / 版本 B　<span class="btn">跑同一组回归用例</span>　｜　只展示对比，不自动切换</div>
+      <div class="bar">结论区　哪条规则要收紧或放宽，写依据　｜　不提供一键改配置</div>
+      <div class="foot">规则一旦能自行放松，护栏就失去意义。</div>
+    </div>
+  </div></div>
+</section>
+
+<p class="note">说明：前四页对应 front/app 里已有的路由，后两页是未实现的候选设计；线框里的「方向 A」「示例岗位」都是占位，不是真实数据。本文件不连任何服务，也不引用个人能力库。配套文字说明见 04-页面原型.md。</p>
 
 <script>
   var buttons = document.querySelectorAll('nav button');
